@@ -1,0 +1,18 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 50px 400px;
+  padding: 50px;
+  border: 1px solid rgb(130, 120, 163);
+  gap: 15px;
+}
+
+.title {
+  text-align: center;
+  font-weight: 700;
+  background-image: linear-gradient(to left, #bd12ac, #0fd415); //
+  background-clip: text; //
+  color: transparent; //
+}

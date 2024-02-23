@@ -1,0 +1,30 @@
+.container {
+  background-color: rgb(255, 255, 255);
+  padding: 10px 0;
+  margin-bottom: 30px;
+  border-bottom: 1.5px solid rgb(238, 243, 252);
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.emblem {
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 24px;
+  background-image: linear-gradient(to left, #bd12ac, #0fd415); //
+  background-clip: text; //
+  color: transparent; //
+  transition: opacity 1s ease;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+.buttons {
+  display: flex;
+  gap: 5px;
+}
