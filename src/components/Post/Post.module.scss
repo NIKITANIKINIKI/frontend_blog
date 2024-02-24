@@ -1,0 +1,34 @@
+.user{
+    display: flex;
+    margin: 10px 0;
+    gap:5px;
+}
+
+.label{
+    margin-left: 45px;
+}
+
+.tags{
+    display: flex;
+    gap:10px;
+}
+
+.edButton{
+    position: absolute;
+    background-color: aliceblue;
+    right: 15px;
+    top: 15px;
+    border-radius: 10px;
+}
+
+.root{
+    position: relative;
+    overflow: hidden; // 1
+    border-radius: 10px;
+}
+
+.banner{
+    width: 100%; // 1
+    height: 300px;
+    margin-bottom: 15px;
+}
