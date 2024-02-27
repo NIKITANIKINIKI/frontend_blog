@@ -8,14 +8,15 @@ import {
   ListItemText
 } from "@mui/material";
 import Paper from "@mui/material/Paper";
+import styles from './CommentsBlock.module.scss'
 
 import React from "react";
 
-function CommentsBlock({ items }) {
-  const [isLoading, changeLoading] = React.useState(true);
+function CommentsBlock({items, children}) {
+  const [isLoading, changeLoading] = React.useState(false);
   return (
     <Paper>
-      <Typography variant="h6" align="center">
+      <Typography classes={{root: styles.title}} variant="h6" align="center">
         Comments
       </Typography>
       <List>
@@ -41,6 +42,7 @@ function CommentsBlock({ items }) {
           </React.Fragment>
         ))}
       </List>
+      {children}
     </Paper>
   );
 }

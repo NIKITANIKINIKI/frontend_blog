@@ -17,6 +17,8 @@ function Home() {
       <Grid container spacing={2}>
             <Grid item xs={8}>
               <Post/>
+              <Post/>
+              <Post/>
             </Grid>
             <Grid item xs={4}>
                 <TagsBlock items={['ts', 'react', 'js', 'vue']} />

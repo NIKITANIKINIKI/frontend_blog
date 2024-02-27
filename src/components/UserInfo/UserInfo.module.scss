@@ -1,0 +1,22 @@
+
+.root{
+    display: flex;
+    align-items: center;
+    margin-left:10px;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+}
+
+.name{
+    font-weight: 600;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.data{
+    font-size: 12px;
+    opacity: 0.6;
+}

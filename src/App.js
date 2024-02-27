@@ -3,6 +3,8 @@ import Login from "./pages/Login";
 import Registration from "./pages/Registration";
 import Home from "./components/Home";
 import Container from "@mui/material/Container";
+import FullPost from "./pages/FullPost";
+import AddPost from "./pages/AddPost";
 
 
 function App() {
@@ -12,7 +14,9 @@ function App() {
       <Container maxWidth='lg'>
         {/* <Login/> */}
         {/* <Registration/> */}
-        <Home />
+        {/* <Home /> */}
+        {/* <FullPost/> */}
+        <AddPost/>
       </Container>
     </>
   );
