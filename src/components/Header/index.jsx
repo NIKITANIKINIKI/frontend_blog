@@ -14,10 +14,10 @@ function Header() {
             <div>BlogS++</div>
           </Link>
           <div className={styles.buttons}>
-            <Link to="">
+            <Link to="/login">
               <Button color="secondary" variant="contained">Login</Button>
             </Link>
-            <Link to="">
+            <Link to="/registration">
               <Button color="success" variant="contained">Sign up</Button>
             </Link>
           </div>
