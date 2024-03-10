@@ -1,44 +1,66 @@
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Grid from '@mui/material/Grid';
+import Grid from "@mui/material/Grid";
 import CommentBlock from "./CommentsBlock";
-import TagsBlock from './TagBlock'
+import TagsBlock from "./TagBlock";
 import Post from "./Post";
 
-import axios from "../axios";
 import React from "react";
-import {useSelector, useDispatch} from 'react-redux'
-import {postsItems} from '../redux/slice/posts'
+import { useSelector, useDispatch } from "react-redux";
+import { postsItems, tagsItems } from "../redux/slice/posts";
 
 function Home() {
-  
-  const {posts, tags}=useSelector((state) => state.posts)
-  const dispatch=useDispatch()
+  const { posts, tags } = useSelector((state) => state.posts);
+  const dispatch = useDispatch();
+
+  const isPostLoading = posts.status === "loading";
 
   React.useEffect(() => {
-    
-    dispatch(postsItems())
-    
-  },[])
-
-  console.log(posts)
+    dispatch(postsItems());
+    dispatch(tagsItems())
+  }, []);
+  console.log(isPostLoading);
+  console.log(posts);
 
   return (
     <>
-      <Tabs value={0} aria-label="secondary tabs example" textColor="secondary" indicatorColor='secondary' style={{marginBottom:'20px'}}>
+      <Tabs
+        value={0}
+        aria-label="secondary tabs example"
+        textColor="secondary"
+        indicatorColor="secondary"
+        style={{ marginBottom: "20px" }}
+      >
         <Tab label="New" />
         <Tab label="Popular" />
       </Tabs>
       <Grid container spacing={2}>
-            <Grid item xs={8}>
-              <Post/>
-              <Post/>
-              <Post/>
-            </Grid>
-            <Grid item xs={4}>
-                <TagsBlock items={['ts', 'react', 'js', 'vue']} />
-                <CommentBlock items={['ts', 'react', 'js', 'vue']}/>
-            </Grid>
+        <Grid item xs={8}>
+          {(isPostLoading ? [...Array(5)] : posts.items).map((el, index) =>
+            isPostLoading ? (
+              <Post 
+              key={index} 
+              isPostLoading={isPostLoading}
+              />
+            ) : (
+              <Post
+              key={el._id}
+              title={el.title}
+              createAt={el.updateAt}
+              tags={el.tags}
+              viewsNumber={el.viewsNumber}
+              commentsCount={7}
+              user={el.user}
+              imageUrl='https://catherineasquithgallery.com/uploads/posts/2021-03/1614612233_137-p-fon-dlya-fotoshopa-priroda-209.jpg'
+              isPostLoading={isPostLoading}
+              />
+            )
+          )}
+        </Grid>
+        <Grid item xs={4}>
+          <TagsBlock  items={tags.items} />
+          <CommentBlock items={["ts", "react", "js", "vue"]} isPostLoading={isPostLoading} />
+        </Grid>
       </Grid>
     </>
   );

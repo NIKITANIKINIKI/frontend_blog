@@ -10,14 +10,22 @@ import CommentIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import React from "react";
 import styles from "./Post.module.scss";
 
-function Post({ children }) {
-  const [isLoading, changeLoading] = React.useState(false);
-
+function Post({
+  children,
+  isPostLoading,
+  title,
+  createAt,
+  tags,
+  viewsNumber,
+  user,
+  imageUrl,
+  commentsCount
+}) {
   const [isFullPost, changeFull] = React.useState(true);
 
   const [isEd, changeEd] = React.useState(true);
 
-  if (isLoading) {
+  if (isPostLoading) {
     return <SkeletonBlock />;
   }
 
@@ -34,38 +42,27 @@ function Post({ children }) {
           <DeleteIcon />
         </IconButton>
       </div>
-      <img
-        className={styles.banner}
-        src="https://mykaleidoscope.ru/x/uploads/posts/2022-10/1666206241_12-mykaleidoscope-ru-p-kartinka-na-zastavku-oboi-12.jpg"
-        alt=""
-      />
+      <img className={styles.banner} src={imageUrl} alt="photo" />
       <div className={styles.wrapper}>
-        <UserInfo />
+        <UserInfo user={user} />
         <div className={styles.description}>
-          <h2>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae,
-            voluptate.
-          </h2>
+          <h2>{title}</h2>
           <ul className={styles.tags}>
-            <li>
-              <Link>#js</Link>
-            </li>
-            <li>
-              <Link>#ts</Link>
-            </li>
-            <li>
-              <Link>#ts</Link>
-            </li>
+            {tags.map((el) => (
+              <li>
+                <Link>#{el}</Link>
+              </li>
+            ))}
           </ul>
           <span className={styles.text}>{children}</span>
           <ul className={styles.icons}>
             <li>
               <EyeIcon style={{ color: "green" }} />
-              <span>100</span>
+              <span>{viewsNumber}</span>
             </li>
             <li>
               <CommentIcon style={{ color: "red" }} />
-              <span>200</span>
+              <span>{commentsCount}</span>
             </li>
           </ul>
         </div>

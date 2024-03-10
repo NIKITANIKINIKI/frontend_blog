@@ -12,25 +12,25 @@ import styles from './CommentsBlock.module.scss'
 
 import React from "react";
 
-function CommentsBlock({items, children}) {
-  const [isLoading, changeLoading] = React.useState(false);
+function CommentsBlock({items, children, isPostLoading}) {
+  
   return (
     <Paper>
       <Typography classes={{root: styles.title}} variant="h6" align="center">
         Comments
       </Typography>
       <List>
-        {(isLoading ? [...Array(5)] : items).map((obj, index) => (
+        {(isPostLoading ? [...Array(5)] : items).map((obj, index) => (
           <React.Fragment key={index}>
             <ListItem>
               <ListItemAvatar>
-                {isLoading ? (
+                {isPostLoading ? (
                   <Skeleton variant="circular" width={40} height={40} />
                 ) : (
                   <Avatar src='https://ogorodniku.com/uploads/posts/2023-01/1674192794_ogorodniku-com-p-peizazhi-prirodi-foto-1.jpg'/>
                 )}
               </ListItemAvatar>
-              {isLoading ? (
+              {isPostLoading ? (
                   <div style={{ display: "flex", flexDirection: "column" }}>
                   <Skeleton variant="text" height={25} width={120} />
                   <Skeleton variant="text" height={19} width={230} />

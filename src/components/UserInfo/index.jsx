@@ -2,16 +2,16 @@ import {Avatar} from "@mui/material";
 import styles from './UserInfo.module.scss'
 
 
-function UserInfo(){
+function UserInfo({user}){
     return(
         <div className={styles.root}>
-            <Avatar style={{marginRight:'10px'}} src="https://avatars.mds.yandex.net/i?id=e0256dce8bc09481d1c53db082d6d4309d2ac764-11511205-images-thumbs&n=13" alt="photo" />
+            <Avatar style={{marginRight:'10px'}} src={user.avatarURL} alt="photo" />
             <div className={styles.content}>
                 <span className={styles.name}>
-                    Nikita
+                    {user.fullname}
                 </span>
                 <span className={styles.data}>
-                    25.02.2024
+                   {user.createdAt.substring(0,10)}
                 </span>
             </div>
         </div>
