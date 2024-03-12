@@ -9,9 +9,12 @@ import CommentIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 
 import React from "react";
 import styles from "./Post.module.scss";
+import axios from "../../axios";
+import clsx from 'clsx'
 
 function Post({
   children,
+  id,
   isPostLoading,
   title,
   createAt,
@@ -19,9 +22,9 @@ function Post({
   viewsNumber,
   user,
   imageUrl,
-  commentsCount
+  commentsCount,
+  isFullPost
 }) {
-  const [isFullPost, changeFull] = React.useState(true);
 
   const [isEd, changeEd] = React.useState(true);
 
@@ -30,7 +33,7 @@ function Post({
   }
 
   return (
-    <div className={styles.root}>
+    <div className={clsx(styles.root, { [styles.rootNoFullPost]: !isFullPost })}>
       {/* isEd */}
       <div className={styles.edButton}>
         <Link>
@@ -42,31 +45,33 @@ function Post({
           <DeleteIcon />
         </IconButton>
       </div>
-      <img className={styles.banner} src={imageUrl} alt="photo" />
-      <div className={styles.wrapper}>
-        <UserInfo user={user} />
-        <div className={styles.description}>
-          <h2>{title}</h2>
-          <ul className={styles.tags}>
-            {tags.map((el) => (
+      {imageUrl && <img className={styles.banner} src={imageUrl} alt="photo" />}
+      <Link to={`/posts/${id}`}>
+        <div className={styles.wrapper}>
+          <UserInfo user={user} />
+          <div className={styles.description}>
+            <h2>{title}</h2>
+            <ul className={styles.tags}>
+              {tags.map((el) => (
+                <li>
+                  <Link>#{el}</Link>
+                </li>
+              ))}
+            </ul>
+            <span className={styles.text}>{children}</span>
+            <ul className={styles.icons}>
               <li>
-                <Link>#{el}</Link>
+                <EyeIcon style={{ color: "green" }} />
+                <span>{viewsNumber}</span>
               </li>
-            ))}
-          </ul>
-          <span className={styles.text}>{children}</span>
-          <ul className={styles.icons}>
-            <li>
-              <EyeIcon style={{ color: "green" }} />
-              <span>{viewsNumber}</span>
-            </li>
-            <li>
-              <CommentIcon style={{ color: "red" }} />
-              <span>{commentsCount}</span>
-            </li>
-          </ul>
+              <li>
+                <CommentIcon style={{ color: "red" }} />
+                <span>{commentsCount}</span>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 }

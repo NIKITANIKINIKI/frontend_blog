@@ -19,6 +19,7 @@ function App() {
           <Route element={<Registration/>} path='/registration'></Route>
           <Route element={<FullPost/>} path='/posts/:id'></Route>
           <Route element={<AddPost/>} path='/add-post'></Route>
+          
         </Routes>
       </Container>
     </>

@@ -11,7 +11,7 @@ function UserInfo({user}){
                     {user.fullname}
                 </span>
                 <span className={styles.data}>
-                   {user.createdAt.substring(0,10)}
+                   {/* {user.createdAt.substring(0,10)} */}
                 </span>
             </div>
         </div>

@@ -45,14 +45,16 @@ function Home() {
             ) : (
               <Post
               key={el._id}
+              id={el._id}
               title={el.title}
               createAt={el.updateAt}
               tags={el.tags}
               viewsNumber={el.viewsNumber}
               commentsCount={7}
               user={el.user}
-              imageUrl='https://catherineasquithgallery.com/uploads/posts/2021-03/1614612233_137-p-fon-dlya-fotoshopa-priroda-209.jpg'
+              imageUrl={el.imageUrl ? `${el.imageUrl}` : ''}
               isPostLoading={isPostLoading}
+              isFullPost={false}
               />
             )
           )}
