@@ -19,8 +19,6 @@ function Home() {
     dispatch(postsItems());
     dispatch(tagsItems())
   }, []);
-  console.log(isPostLoading);
-  console.log(posts);
 
   return (
     <>

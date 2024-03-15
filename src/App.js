@@ -7,8 +7,20 @@ import FullPost from "./pages/FullPost";
 import AddPost from "./pages/AddPost";
 
 import {Routes, Route} from 'react-router'
+import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import {fetchGetMe} from './redux/slice/login'
 
 function App() {
+
+  const dispatch=useDispatch()
+
+  React.useEffect(()=>{
+
+    dispatch(fetchGetMe())
+
+  }, [])
+
   return (
     <>
       <Header />

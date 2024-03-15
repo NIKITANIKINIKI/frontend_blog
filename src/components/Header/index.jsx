@@ -13,6 +13,7 @@ function Header() {
 
   const onClickLogout=()=>{
     dispatch(logout())
+    window.localStorage.removeItem('token')
   }
 
   return (

@@ -27,8 +27,20 @@ function Login() {
     },
   });
 
-  const onSubmit = (data) => {
-    dispatch(fetchUser(data))
+  const onSubmit = async (val) => {
+    const data = await dispatch(fetchUser(val))
+
+    if(!data.payload){
+      return alert('Failed to login')
+    }
+
+    if('token' in data.payload){
+      window.localStorage.setItem('token', data.payload.token)
+    }
+    else{
+      alert('An error occured in obtaining a token')
+    }
+
   };
 
 
