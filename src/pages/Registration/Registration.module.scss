@@ -19,3 +19,9 @@
     background-clip: text; //
     color: transparent; //
 }
+
+.forms{
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+}

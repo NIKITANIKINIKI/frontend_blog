@@ -18,7 +18,6 @@ function Login() {
   const {
     register,
     handleSubmit,
-    setErrors,
     formState: { errors, isValid },
   } = useForm({
     defaultValues: {
@@ -73,7 +72,7 @@ function Login() {
           <Typography variant="caption">
             Have your forgotten your password?
           </Typography>
-          <Button type="submit" size="lg" variant="contained">
+          <Button disabled={!isValid} type="submit" size="lg" variant="contained">
             Login
           </Button>
         </div>
