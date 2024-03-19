@@ -39,7 +39,7 @@ function Header() {
               </>
             ) : (
               <>
-                <Link to="">
+                <Link to="/add-post">
                   <Button color="success" variant="contained">
                     Create post
                   </Button>

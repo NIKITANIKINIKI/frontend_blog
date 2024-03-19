@@ -23,7 +23,8 @@ function Post({
   user,
   imageUrl,
   commentsCount,
-  isFullPost
+  isFullPost,
+  isAuthor
 }) {
 
   const [isEd, changeEd] = React.useState(true);
@@ -33,7 +34,7 @@ function Post({
   }
 
   return (
-    <div className={clsx(styles.root, { [styles.rootNoFullPost]: !isFullPost })}>
+    <div className={clsx(styles.root, { [styles.rootNoFullPost]: !isFullPost && isAuthor })}>
       {/* isEd */}
       <div className={styles.edButton}>
         <Link>

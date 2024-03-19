@@ -1,0 +1,44 @@
+.root{
+  margin-top:10px;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.content {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 60%;
+}
+
+.buttons {
+  display: flex;
+  justify-content: right;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.editor {
+    margin-top: 10px;
+  
+    :global {
+      .cm-s-easymde {
+        border: 0;
+        font-size: 22px;
+      }
+      .editor-toolbar {
+        border: 0;
+        background-color: rgb(0 0 0 / 2%);
+      }
+    }
+  }
+  
+.image{
+  width: 50%;
+  margin: 10px auto;
+}

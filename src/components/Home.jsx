@@ -11,6 +11,7 @@ import { postsItems, tagsItems } from "../redux/slice/posts";
 
 function Home() {
   const { posts, tags } = useSelector((state) => state.posts);
+  const {data}=useSelector((state) => state.auth)
   const dispatch = useDispatch();
 
   const isPostLoading = posts.status === "loading";
@@ -53,6 +54,7 @@ function Home() {
               imageUrl={el.imageUrl ? `${el.imageUrl}` : ''}
               isPostLoading={isPostLoading}
               isFullPost={false}
+              isAuthor={el.user._id===data?._id}
               />
             )
           )}
