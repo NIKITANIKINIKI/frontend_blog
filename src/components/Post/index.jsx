@@ -10,46 +10,61 @@ import CommentIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import React from "react";
 import styles from "./Post.module.scss";
 import axios from "../../axios";
-import clsx from 'clsx'
+import clsx from "clsx";
+import { useDispatch, useSelect } from "react-redux";
+import {deleteItem} from '../../redux/slice/posts'
 
 function Post({
   children,
   id,
   isPostLoading,
   title,
-  createAt,
   tags,
   viewsNumber,
   user,
   imageUrl,
   commentsCount,
   isFullPost,
-  isAuthor
+  isAuthor,
 }) {
 
-  const [isEd, changeEd] = React.useState(true);
+  const dispatch=useDispatch()
+
 
   if (isPostLoading) {
     return <SkeletonBlock />;
   }
 
+  const onDeletePost=()=>{
+    dispatch(deleteItem(id))
+  }
+
   return (
-    <div className={clsx(styles.root, { [styles.rootNoFullPost]: !isFullPost && isAuthor })}>
+    <div
+      className={clsx(styles.root, {
+        [styles.rootNoFullPost]: !isFullPost && isAuthor,
+      })}
+    >
       {/* isEd */}
       <div className={styles.edButton}>
-        <Link>
+        <Link to={`/posts/${id}/edit`}>
           <IconButton color="primary">
             <EditIcon />
           </IconButton>
         </Link>
-        <IconButton color="secondary">
+        <IconButton onClick={onDeletePost} color="secondary">
           <DeleteIcon />
         </IconButton>
       </div>
       {imageUrl && <img className={styles.banner} src={imageUrl} alt="photo" />}
       <Link to={`/posts/${id}`}>
         <div className={styles.wrapper}>
-          <UserInfo user={user} />
+          <UserInfo
+            avatarURL={user.avatarURL}
+            fullname={user.fullname}
+            createdAt={user.createdAt}
+          />
+
           <div className={styles.description}>
             <h2>{title}</h2>
             <ul className={styles.tags}>

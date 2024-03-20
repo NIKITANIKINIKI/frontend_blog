@@ -4,6 +4,7 @@ import AddComment from "../../components/AddComment";
 import { useParams } from "react-router";
 import React from "react";
 import axios from "../../axios";
+import ReactMarkdown from "react-markdown";
 
 function FullPost() {
   const { id } = useParams();
@@ -34,10 +35,12 @@ function FullPost() {
             viewsNumber={article.viewsNumber}
             commentsCount={7}
             user={article.user}
-            imageUrl={article.imageUrl ? `${article.imageUrl}` : ""}
+            imageUrl={ article.imageUrl ? `http://localhost:4444${article.imageUrl}` : ''}
             isPostLoading={isPostLoading}
             isFullPost={true}
-          ></Post>
+          >
+            <ReactMarkdown children={article.text}></ReactMarkdown>
+          </Post>
           <CommentsBlock items={[111, 1111, 222]}>
             <AddComment />
           </CommentsBlock>

@@ -4,15 +4,18 @@ import styles from "./AddPost.module.scss";
 import React from "react";
 import "easymde/dist/easymde.min.css";
 import axios from "../../axios";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import {selectIsAuth} from '../../redux/slice/login'
+import { selectIsAuth } from "../../redux/slice/login";
 
 function AddPost() {
+  const { id } = useParams();
 
-  const isAuth=useSelector(selectIsAuth)
+  const isEdit=Boolean(id)
 
-  const navigate=useNavigate()
+  const isAuth = useSelector(selectIsAuth);
+
+  const navigate = useNavigate();
   const inputRef = React.useRef();
   const [loading, setLoading] = React.useState(false);
   const [text, setText] = React.useState();
@@ -40,6 +43,19 @@ function AddPost() {
     }
   };
 
+  React.useEffect(() => {
+    if (id) {
+      axios.get(`/posts/${id}`).then(({data}) => {
+        setText(data.text);
+        setTags(data.tags);
+        setTitle(data.title);
+        setImageUrl(data.imageUrl);
+      }).catch((err) => {
+        console.log(err)
+      })
+    }
+  }, []);
+
   const options = React.useMemo(
     () => ({
       spellChecker: false,
@@ -62,23 +78,22 @@ function AddPost() {
       const fields = {
         text,
         title,
-        tags:tags.split(','),
-        imageUrl
+        tags: tags.split(","),
+        imageUrl,
       };
 
-      const { data } = await axios.post("/posts", fields);
+      const { data } = await !isEdit ? axios.post("/posts", fields) : axios.patch(`/posts/${id}`, fields)
 
-      const id=data._id 
+      const _id = isEdit ? id : data._id;
 
-      navigate(`/posts/${id}`)
-
+      navigate(`/posts/${_id}`);
     } catch (err) {
       console.warn(err);
     }
   };
 
-  if(!window.localStorage.getItem('token') &&  !isAuth){
-    return <Navigate to='/'></Navigate>
+  if (!window.localStorage.getItem("token") && !isAuth) {
+    return <Navigate to="/"></Navigate>;
   }
 
   return (
@@ -134,7 +149,9 @@ function AddPost() {
             options={options}
           />
           <div className={styles.buttons}>
-            <Button variant="contained" onClick={() => onSubmit()}>Publish</Button>
+            <Button variant="contained" onClick={() => onSubmit()}>
+              {isEdit ? 'Save' : 'Publish'}
+            </Button>
             <Link to="/">
               <Button variant="contained" color="error">
                 cancel

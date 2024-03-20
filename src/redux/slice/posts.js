@@ -29,6 +29,13 @@ export const tagsItems=createAsyncThunk(
     }
 )
 
+export const deleteItem=createAsyncThunk(
+    'post/fetchByItems',
+    async(id) =>{
+        const data=await axios.delete(`/posts/${id}`)
+        return data
+    }
+)
 
 
 const postsSlice=createSlice({
@@ -50,6 +57,7 @@ const postsSlice=createSlice({
             state.posts.items=[]
             state.posts.status='error'
         })
+
         .addCase(tagsItems.fulfilled, (state, action) =>{
             state.tags.items=action.payload.data
             state.tags.status='success'
@@ -61,6 +69,10 @@ const postsSlice=createSlice({
         .addCase(tagsItems.pending, (state) =>{
             state.tags.items=[]
             state.tags.status='error'
+        })
+
+        .addCase(deleteItem.fulfilled, (state, action) =>{
+            state.posts.items=state.posts.items.filter((el) => el._id!==action.meta.arg) 
         })
     }
 })

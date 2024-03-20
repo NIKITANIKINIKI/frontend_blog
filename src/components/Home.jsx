@@ -7,7 +7,7 @@ import Post from "./Post";
 
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { postsItems, tagsItems } from "../redux/slice/posts";
+import { postsItems, tagsItems  } from "../redux/slice/posts";
 
 function Home() {
   const { posts, tags } = useSelector((state) => state.posts);
@@ -51,7 +51,7 @@ function Home() {
               viewsNumber={el.viewsNumber}
               commentsCount={7}
               user={el.user}
-              imageUrl={el.imageUrl ? `${el.imageUrl}` : ''}
+              imageUrl={el.imageUrl ? `http://localhost:4444${el.imageUrl}` : ''}
               isPostLoading={isPostLoading}
               isFullPost={false}
               isAuthor={el.user._id===data?._id}
