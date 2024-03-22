@@ -15,8 +15,8 @@ const initialState={
 
 export const postsItems=createAsyncThunk(
     'posts/fetchByItems',
-    async() =>{
-        const data=await axios.get('/posts')
+    async(params) =>{
+        const data=await axios.get(`/posts/?sortBy=${params}`)
         return data 
     }
 )

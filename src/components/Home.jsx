@@ -18,22 +18,30 @@ function Home() {
 
   const isPostLoading = posts.status === "loading";
 
+  const [value, setValue]=React.useState('allPosts')
+
   React.useEffect(() => {
-    dispatch(postsItems());
+    dispatch(postsItems(value));
     dispatch(tagsItems());
-  }, []);
+  }, [value]);
+
+  const handleChange =(event, newValue) =>{
+    setValue(newValue)
+    console.log(newValue)
+  }
 
   return (
     <>
       <Tabs
-        value={0}
+        value={value}
+        onChange={handleChange}
         aria-label="secondary tabs example"
         textColor="secondary"
         indicatorColor="secondary"
         style={{ marginBottom: "20px" }}
       >
-        <Tab label="New" />
-        <Tab label="Popular" />
+        <Tab label="New" value='allPosts' />
+        <Tab label="Popular" value='topPosts'/>
       </Tabs>
       <Grid container spacing={2}>
         <Grid item xs={8}>
