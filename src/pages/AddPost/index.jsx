@@ -82,7 +82,7 @@ function AddPost() {
         imageUrl,
       };
 
-      const { data } = await !isEdit ? axios.post("/posts", fields) : axios.patch(`/posts/${id}`, fields)
+      const { data } = !isEdit ? await axios.post("/posts", fields) : await axios.patch(`/posts/${id}`, fields)
 
       const _id = isEdit ? id : data._id;
 

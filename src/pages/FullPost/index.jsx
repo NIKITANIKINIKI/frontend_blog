@@ -41,7 +41,7 @@ function FullPost() {
           >
             <ReactMarkdown children={article.text}></ReactMarkdown>
           </Post>
-          <CommentsBlock items={[111, 1111, 222]}>
+          <CommentsBlock>
             <AddComment />
           </CommentsBlock>
         </>

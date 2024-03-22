@@ -6,16 +6,18 @@ import ListItemText from "@mui/material/ListItemText";
 import TagIcon from "@mui/icons-material/Tag";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
+import no_tags from "../../assets/no_tags.png";
 
 import React from "react";
 import { Link } from "react-router-dom";
 import { Skeleton } from "@mui/material";
+import NoData from "../NoData";
 
 function TagsBlock({ items }) {
   const [isLoading, changeLoading] = React.useState(false);
 
   return (
-    <Paper style={{ marginBottom:'10px'}}>
+    <Paper style={{ marginBottom: "10px" }}>
       <Typography variant="h6" align="center">
         Tags
       </Typography>
@@ -36,6 +38,9 @@ function TagsBlock({ items }) {
             </ListItem>
           </Link>
         ))}
+        {!isLoading && items.length === 0 && (
+          <NoData image={no_tags} title="There are no tags" text="" />
+        )}
       </List>
     </Paper>
   );
